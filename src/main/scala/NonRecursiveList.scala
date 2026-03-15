@@ -20,7 +20,7 @@ object FixedNonRecursiveLists:
     else Fix(Cons(xs.head, makeList(xs.tail: _*)))
 
 object NonRecursiveListAlgebras:
-  val lengthAlgebra: NonRecursiveList[Any, Int] => Int = {
+  def lengthAlgebra[T]: NonRecursiveList[T, Int] => Int = {
     case Cons(_, tail) => 1 + tail
     case Nil => 0
   }
@@ -28,17 +28,11 @@ object NonRecursiveListAlgebras:
     case Cons(head, tail) => head :: tail
     case Nil => scala.Nil
   }
-  val sumAlgebra: NonRecursiveList[Int, Int] => Int = {
+  def sumAlgebra: NonRecursiveList[Int, Int] => Int = {
     case Cons(head, tail) => head + tail
     case Nil => 0
   }
 
-  def getLength[T](list: FixedNonRecursiveList[T]): Int =
-    Fix.cata(lengthAlgebra)(list)
-  
-  def toList[T](list: FixedNonRecursiveList[T]): List[T] =
-    Fix.cata(toListAlgebra)(list)
-
-  def sum(list: FixedNonRecursiveList[Int]): Int =
-    Fix.cata(sumAlgebra)(list)
-  
+  def getLength[T](l: FixedNonRecursiveList[T]) = Fix.cata(lengthAlgebra)(l)
+  def toList[T](l: FixedNonRecursiveList[T]) = Fix.cata(toListAlgebra)(l)
+  def sum(l: FixedNonRecursiveList[Int]) = Fix.cata(sumAlgebra)(l)

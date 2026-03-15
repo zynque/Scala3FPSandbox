@@ -1,5 +1,6 @@
  import Expression.*
  import FixedExpressions.*
+ import Fix.cata
 
 enum Expression[A]:
   case Lit(value: Int)
@@ -31,8 +32,5 @@ object ExpressionAlgebras:
     case Mul(left, right) => s"($left * $right)"
   }
 
-  def eval(expr: FixedExpression): Int =
-    Fix.cata(evalAlgebra)(expr)
-  
-  def print(expr: FixedExpression): String =
-    Fix.cata(printAlgebra)(expr)
+  val eval = cata(evalAlgebra)
+  val print = cata(printAlgebra)
