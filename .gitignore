@@ -1,3 +1,20 @@
-.bsp
-.idea
-target
+# sbt build artifacts
+target/
+project/target/
+project/project/
+
+# Metals (Scala language server)
+.metals/
+project/metals.sbt
+
+# Bloop (build server)
+.bloop/
+
+# BSP connection files
+.bsp/
+
+# VS Code
+.vscode/
+
+# IntelliJ
+.idea/
